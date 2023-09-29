@@ -1,0 +1,11 @@
+#cronometro {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+#timer span {
+    padding: 5px;
+}

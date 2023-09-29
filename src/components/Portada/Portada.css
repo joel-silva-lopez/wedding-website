@@ -2,10 +2,25 @@
     margin: 0;
     padding: 0;
 }
+
+.container {
+  display: inline-block;
+  position: relative;
+}
+
 .imagen-principal {
+  border: 1px solid blue;
   height: 100vh;
   max-width: 100%;
   max-height: 800px; /* Establece un límite máximo de 600px para la altura de la imagen */
   object-fit: cover; /* Para ajustar la imagen al tamaño máximo sin distorsionar */
   image-rendering: smooth;
+  filter: blur(3px);
+}
+
+.texto { 
+  position: absolute;
+  left: 10%;
+  top: 70%;
+  text-shadow: 0 0 5px #fff;
 }
