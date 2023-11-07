@@ -1,17 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Portada } from './components/Portada/Portada'
+import { useState, useEffect } from "react";
+import "./App.css";
+import { Portada } from "./components/Portada/Portada";
+import { Historia } from "./components/Saludos/Historia";
+import { Footer } from "./components/Footer/Footer";
+import { Itinerario } from "./components/itinerario/Itinerario";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [bienvenida, setBienvenida] = useState(true);
+
+
+  useEffect(() => {
+    setTimeout( () => {
+      if (bienvenida) setBienvenida(!bienvenida);
+    }, 3000)
+  }, []);
 
   return (
     <>
-      <Portada></Portada>
+      {bienvenida ? (
+        <div className="container-logo">
+          <img
+            src="/JD_logo.png"
+            className="logo-carga"
+            onClick={() => {
+              setBienvenida(!bienvenida);
+            }}
+          ></img>
+        </div>
+      ) : (
+        <div className="container-general">
+          <Portada></Portada>
+          <Historia></Historia>
+          <Itinerario></Itinerario>
+          <Footer></Footer>
+        </div>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

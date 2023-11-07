@@ -1,0 +1,4 @@
+.itinerario-container {
+  display: grid;
+  grid-template: 1fr 1fr / auto-fill auto-fill;
+}

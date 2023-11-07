@@ -1,11 +1,26 @@
 #cronometro {
-    font-family: Arial, sans-serif;
+    margin-top: 5px;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
-    margin: 20px;
 }
 
-#timer span {
-    padding: 5px;
+#timer {
+    display: flex;
+    justify-content: center;
+
+    & span:not(.timer-label) {
+        padding: 5px;
+        font-size: 1.4em;
+    }
+}
+
+.timer-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.timer-label {
+    text-decoration: underline;
+    font-size: 1.2em;
 }
