@@ -1,22 +1,26 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { Portada } from "./components/Portada/Portada";
-import { Historia } from "./components/Saludos/Historia";
-import { Footer } from "./components/Footer/Footer";
-import { Itinerario } from "./components/itinerario/Itinerario";
+import { Contenedor } from "./Contenedor";
+import { FormularioConfirmacion } from "./components/Formularios/FormularioConfirmacion";
 
 function App() {
+  const handleDragStart = (event) => {
+    if (event.target.tagName === "IMG") {
+      event.preventDefault();
+    }
+  };
+
   const [bienvenida, setBienvenida] = useState(true);
 
-
   useEffect(() => {
-    setTimeout( () => {
+    setTimeout(() => {
       if (bienvenida) setBienvenida(!bienvenida);
-    }, 3000)
+    }, 3000);
   }, []);
 
+
   return (
-    <>
+    <div onDragStart={handleDragStart}>
       {bienvenida ? (
         <div className="container-logo">
           <img
@@ -29,14 +33,13 @@ function App() {
         </div>
       ) : (
         <div className="container-general">
-          <Portada></Portada>
-          <Historia></Historia>
-          <Itinerario></Itinerario>
-          <Footer></Footer>
+          <Contenedor></Contenedor>
         </div>
       )}
-    </>
+    </div>
   );
+
 }
+
 
 export default App;

@@ -12,12 +12,12 @@
   image-rendering: smooth;
 }
 
-@media screen and (width < 570px) {
+/* @media screen and (width < 570px) {
   .imagen-historia {
     height: 100%;
     width: auto;
   }
-}
+} */
 
 .historia {
 
@@ -26,10 +26,10 @@
   align-items: center;
   justify-items: center;
   position: absolute;
-  background-color: brown;
-  left: 95vw;
+  background-color: #ff0404;
+  left: 95%;
   box-sizing: border-box;
-  width: 100vw;
+  width: 100%;
   top: 0;
   bottom: 0;
   padding: 0 max(3em, 10vw);

@@ -1,0 +1,76 @@
+#formulario {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px #fff solid;
+  border-radius: 15px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: width 3s;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1vw;
+}
+
+#numeroPases {
+  color: var(--dorado);
+  font-size: 15vw;
+  text-shadow: 0 0 5px #000;
+}
+
+.titulo-pases {
+  font-weight: lighter;
+  font-size: 10vw;
+}
+
+.btn {
+  font-size: 3vw;
+  padding: 1vw;
+  border-radius: 15px;
+  border: 2px solid #aaa;
+  background: rgba(200, 200, 200, 0.6);
+}
+
+.btn.inicio {
+  font-size: 5vw;
+}
+
+.btn.primary:hover {
+  background: rgba(13,114,131, 0.6);
+}
+
+.btn:hover {
+  border-color: #fff;
+  background: rgba(230, 230, 230, 0.6);
+  transition-duration: 1s; 
+}
+
+.texto-formulario {
+  font-size: 3vw;
+}
+
+.marco-formulario {
+  background: #fff;
+  border-radius: 5px;
+  border: 1px var(--dorado) solid;
+}
+
+.texto-formulario.nombres{
+  font-weight: bold;
+  padding: 10px;
+  list-style: none;
+}
+
+.texto-formulario.dorado{
+  color: var(--dorado);
+  text-shadow: 0 0 2px #aaa;
+}
+
+.texto-formulario input[type="checkbox"] {
+  margin-right: 8px;
+  border: 2px solid #4caf50; /* Cambia el color del borde según tus preferencias */
+  border-radius: 4px;
+}
