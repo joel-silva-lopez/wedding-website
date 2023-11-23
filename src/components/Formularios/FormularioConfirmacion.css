@@ -7,12 +7,17 @@
   border-radius: 15px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.6);
-  transition: width 3s;
+  transition: opacity 1.5s;
   width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1vw;
+  overflow: hidden;
+}
+
+#formulario.transicion-formulario {
+  opacity: 0;
 }
 
 #numeroPases {
@@ -48,6 +53,12 @@
   transition-duration: 1s; 
 }
 
+.btn:active {
+  border-color: #fff;
+  background: rgba(230, 230, 230, 0.6);
+  transition-duration: 0.5s; 
+}
+
 .texto-formulario {
   font-size: 3vw;
 }
@@ -73,4 +84,33 @@
   margin-right: 8px;
   border: 2px solid #4caf50; /* Cambia el color del borde según tus preferencias */
   border-radius: 4px;
+}
+
+#celular-formulario {
+  padding: 8px;
+  font-size: 40px;
+  text-align: center;
+  outline: none;
+  border-color:  #3498db;
+  border-radius: 5px;
+}
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  border: 8px solid #f3f3f3; /* Light gray border */
+  border-top: 8px solid #3498db; /* Blue border */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

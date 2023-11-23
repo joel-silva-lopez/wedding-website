@@ -48,15 +48,22 @@ const Formulario = () => {
     nombres: ["Joel", "Dayana"],
     nombresSeleccionados: [],
     telefono: "",
+    confirmado:false
   });
+
+  const sendConfirmacionInfo = () => {
+    console.log('Enviando informacion...');
+    setTimeout(() => {setConfirmacionInfo((prev) => ({...prev, confirmado:true}))}, 1000)
+  }
 
   return (
     <div className="contenedor-formulario">
       <img src="/formulario.png" alt="Bienvenida" />
-      <FormularioConfirmacion
+      { !confirmacionInfo.confirmado ? <FormularioConfirmacion
         setConfirmacionInfo={setConfirmacionInfo}
         confirmacionInfo={confirmacionInfo}
-      />
+        sendConfirmacionInfo={sendConfirmacionInfo}
+      />: (<h1>Ya confirmaste</h1>)}
     </div>
   );
 };

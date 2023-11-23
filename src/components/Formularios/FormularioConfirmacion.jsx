@@ -1,31 +1,47 @@
-import './FormularioConfirmacion.css'
+import "./FormularioConfirmacion.css";
 import { PasesInfo } from "./PasesInfo";
 import { SeleccionNombres } from "./SeleccionNombres";
 import { ConfirmacionNombres } from "./ConfirmacionNombres";
 import { IngresarNumeroCelular } from "./IngresarNumeroCelular";
+import { useState } from "react";
 
 export const FormularioConfirmacion = ({
   setConfirmacionInfo,
   confirmacionInfo,
+  sendConfirmacionInfo
 }) => {
-
   const { fase, nombres, nombresSeleccionados } = confirmacionInfo;
+  const [animate, setAnimate] = useState(false);
 
   const avanzarFase = () => {
-    setConfirmacionInfo((prev) => ({ ...prev, fase: fase + 1 }));
+    setAnimate(true);
+    setTimeout(() => {
+      setConfirmacionInfo((prev) => ({ ...prev, fase: fase + 1 }));
+      setAnimate(false);
+    }, 1500);
   };
 
   const retrocederFase = () => {
-    setConfirmacionInfo((prev) => ({ ...prev, fase: fase - 1 }));
+    setAnimate(true);
+    setTimeout(() => {
+      setConfirmacionInfo((prev) => ({ ...prev, fase: fase - 1 }));
+      setAnimate(false);
+    }, 1500);
   };
 
   const setTelefono = (telefono) => {
     setConfirmacionInfo({ ...confirmacionInfo, telefono });
   };
 
+  if (fase === 5) {
+    sendConfirmacionInfo()
+  }
 
   return (
-    <div id="formulario">
+    <div
+      id="formulario"
+      className={`${animate ? "transicion-formulario" : ""}`}
+    >
       {fase === 1 && (
         <PasesInfo
           numeroDePases={nombres?.length || 0}
@@ -58,6 +74,11 @@ export const FormularioConfirmacion = ({
           avanzarFase={avanzarFase}
           retrocederFase={retrocederFase}
         />
+      )}
+      {fase === 5 && (
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
       )}
     </div>
   );
