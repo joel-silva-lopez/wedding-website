@@ -9,7 +9,6 @@ export const IngresarNumeroCelular = ({
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value.replace(/\D/g, ""); // Filtra solo dígitos
-    console.log(inputValue);
     const formattedValue = inputValue
       .slice(0, 10) // Limitamos la longitud a 10 caracteres
       .replace(/(\d{2})(?=\d{2})/g, "$1 - ") // Agrupamos de dos en dos con guiones

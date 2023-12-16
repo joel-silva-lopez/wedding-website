@@ -30,6 +30,33 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  
+}
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 2s;
+  box-shadow: 10px 10px 200px #000;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  & img {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 30px;
+    transform: translate(-50%, -50%) scaleY(-1);
+  }
 }
 
 .logo-carga {

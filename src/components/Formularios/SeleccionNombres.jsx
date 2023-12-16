@@ -25,10 +25,16 @@ export const SeleccionNombres = ({
         confirmar. Los invitados con casillas sin seleccionar se cancelarán en
         automático.
       </p>
+      <p className="texto-formulario">Los pases son intranferibles</p>
       <ul>
         {nombres.map((nombre) => (
-          <li key={nombre} className={`texto-formulario nombres ${nombresSeleccionados.includes(nombre) ? 'dorado':''}`}>
-            <label >
+          <li
+            key={nombre}
+            className={`texto-formulario nombres ${
+              nombresSeleccionados.includes(nombre) ? "dorado" : ""
+            }`}
+          >
+            <label>
               <input
                 type="checkbox"
                 checked={nombresSeleccionados.includes(nombre)}
@@ -39,7 +45,9 @@ export const SeleccionNombres = ({
           </li>
         ))}
       </ul>
-      <button className="btn primary" onClick={avanzarFase}>Avanzar</button>
+      <button className="btn primary" onClick={avanzarFase}>
+        Avanzar
+      </button>
     </>
   );
 };

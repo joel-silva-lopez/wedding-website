@@ -1,10 +1,19 @@
 import "./Contenedor.css";
+import { Confirmado } from "./components/Formularios/Confirmado";
 import { FormularioConfirmacion } from "./components/Formularios/FormularioConfirmacion";
 import { Cronometro } from "./components/Portada/Cronometro";
 import { Historia } from "./components/Saludos/Historia";
 import { useEffect, useState, useRef } from "react";
 
 export const Contenedor = () => {
+  const [confirmacionInfo, setConfirmacionInfo] = useState({
+    fase: 1,
+    nombres: ["Joel", "Dayana"],
+    nombresSeleccionados: [],
+    telefono: "",
+    confirmado: false,
+  });
+
   return (
     <>
       <div className="container">
@@ -22,13 +31,24 @@ export const Contenedor = () => {
 
           <Historia imagen="/foto-juntos.png" />
 
-          <img src="/poema-el.png" alt="Poema de parte de el" />
+          {/* <img src="/poema-el.png" alt="Poema de parte de el" /> */}
 
           <Salones />
 
           <img src="/itinerario.png" alt="Itinerario" />
 
-          <Formulario />
+          <Vestimenta />
+
+          <Mensaje />
+
+          <Anuncio />
+
+          <Formulario
+            confirmacionInfo={confirmacionInfo}
+            setConfirmacionInfo={setConfirmacionInfo}
+          />
+
+          <Redes />
 
           <img src="/fotos-novios.png" alt="Fotos de los novios" />
 
@@ -42,28 +62,28 @@ export const Contenedor = () => {
   );
 };
 
-const Formulario = () => {
-  const [confirmacionInfo, setConfirmacionInfo] = useState({
-    fase: 1,
-    nombres: ["Joel", "Dayana"],
-    nombresSeleccionados: [],
-    telefono: "",
-    confirmado:false
-  });
-
+const Formulario = ({ confirmacionInfo, setConfirmacionInfo }) => {
   const sendConfirmacionInfo = () => {
-    console.log('Enviando informacion...');
-    setTimeout(() => {setConfirmacionInfo((prev) => ({...prev, confirmado:true}))}, 1000)
-  }
+    console.log("Enviando informacion...");
+    setTimeout(() => {
+      setConfirmacionInfo((prev) => ({ ...prev, confirmado: true }));
+    }, 1000);
+  };
 
   return (
     <div className="contenedor-formulario">
       <img src="/formulario.png" alt="Bienvenida" />
-      { !confirmacionInfo.confirmado ? <FormularioConfirmacion
-        setConfirmacionInfo={setConfirmacionInfo}
-        confirmacionInfo={confirmacionInfo}
-        sendConfirmacionInfo={sendConfirmacionInfo}
-      />: (<h1>Ya confirmaste</h1>)}
+      {!confirmacionInfo.confirmado ? (
+        <FormularioConfirmacion
+          setConfirmacionInfo={setConfirmacionInfo}
+          confirmacionInfo={confirmacionInfo}
+          sendConfirmacionInfo={sendConfirmacionInfo}
+        />
+      ) : (
+        <Confirmado
+          nombresSeleccionados={confirmacionInfo.nombresSeleccionados}
+        />
+      )}
     </div>
   );
 };
@@ -123,6 +143,76 @@ const Salones = () => {
       >
         ¿CÓMO LLEGAR?
       </a>
+    </div>
+  );
+};
+
+const Mensaje = () => {
+  return (
+    <div className="container-mensaje">
+      <img src="/mensaje-marco.png" alt="" />
+      <div className="container-texto-mensaje">
+        <img src="/ramas.png" alt="ramas bontias" />
+        <div className="texto-mensaje">
+          <p>¡Que nos acompañes es lo más importante!</p>
+          <p style={{ marginTop: "15px" }}>
+            Sí está en tu disposición realizar una muestra de cariño estaremos
+            muy agradecidos.
+          </p>
+        </div>
+        <img
+          src="/ramas.png"
+          alt="ramas bontias"
+          style={{ transform: "scaleY(-1)" }}
+        />
+      </div>
+    </div>
+  );
+};
+
+const Vestimenta = () => {
+  return (
+    <div className="container-vestimenta">
+      <span>Código de Vestimenta</span>
+      <img src="/division.png" alt="" style={{ transform: "scaleY(-1)" }} />
+      <img id="img-vestimenta" src="/formal.jpg" alt="" />
+      <span>Formal</span>
+      <img src="/division.png" alt="" />
+    </div>
+  );
+};
+
+const Anuncio = () => {
+  return (
+    <div className="container-anuncio">
+      <img src="/division.png" alt="" style={{ transform: "scaleY(-1)" }} />
+      <p>
+        PARA PERMITIR QUE TODOS LOS INVITADOS INCLUIDOS LOS PADRES LA PASEN BIEN
+        EN EL EVENTO, HEMOS ELEGIDO QUE EL DÍA DE NUESTRO MATRIMONIO SEA
+        <strong> SOLO PARA ADULTOS</strong>.
+      </p>
+      <p>
+        RESPETUOSAMENTE
+        <strong> NO NIÑOS</strong>.
+      </p>
+      <img src="/division.png" alt="" />
+    </div>
+  );
+};
+
+const Redes = () => {
+  return (
+    <div className="container-redes">
+      <div className="card">
+        <span className="texto-redes hashtag">
+          #JoelyDayana
+        </span>
+        <img src="/camera.webp" alt="" />
+        <span className="texto-redes">
+          Comparte con nosotros todas tus fotografías del evento usando el
+          siguiente #hashtag
+        </span>
+      </div>
     </div>
   );
 };

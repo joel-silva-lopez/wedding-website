@@ -1,7 +1,19 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { Contenedor } from "./Contenedor";
-import { FormularioConfirmacion } from "./components/Formularios/FormularioConfirmacion";
+import { Musica } from "./components/Reproductor/Musica";
+
+const ToolTip = ({ showTooltip }) => {
+  return (
+    <>
+      <div className={`tooltip ${showTooltip ? "visible" : ""}`}>
+      <img className="" src="/flecha.png" alt="" />
+
+        Presiona aqui
+      </div>
+    </>
+  );
+};
 
 function App() {
   const handleDragStart = (event) => {
@@ -11,13 +23,13 @@ function App() {
   };
 
   const [bienvenida, setBienvenida] = useState(true);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      if (bienvenida) setBienvenida(!bienvenida);
+      if (!showTooltip) setShowTooltip(true);
     }, 3000);
   }, []);
-
 
   return (
     <div onDragStart={handleDragStart}>
@@ -30,16 +42,25 @@ function App() {
               setBienvenida(!bienvenida);
             }}
           ></img>
+          {<ToolTip showTooltip={showTooltip} />}
         </div>
       ) : (
         <div className="container-general">
+          <Musica />
           <Contenedor></Contenedor>
         </div>
       )}
     </div>
   );
 
+  /* 
+  3:30
+  630
+  7
+  8
+  1130
+  
+  */
 }
-
 
 export default App;
