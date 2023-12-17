@@ -1,4 +1,4 @@
-const BASE_URL = "https://apiwedding-production.up.railway.app:55555/api";
+const BASE_URL = "https://apiwedding-production.up.railway.app/api";
 
 export const apiwedding = {
   async obtenerFamiliaInfo(id) {
