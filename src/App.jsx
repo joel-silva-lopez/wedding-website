@@ -1,35 +1,94 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
+import { Contenedor } from "./Contenedor";
+import { apiwedding } from "./hooks/WeddingHook";
+import { Error404 } from "./components/Errores/Error404";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const handleDragStart = (event) => {
+    if (event.target.tagName === "IMG") {
+      event.preventDefault();
+    }
+  };
+
+  const [bienvenida, setBienvenida] = useState(true);
+  const [familyId, setFamilyId] = useState('')
+  const [confirmacionInfo, setConfirmacionInfo] = useState({
+    "_id": "6577c542a86b223485c26d54",
+    "titulo": "Fam. Prueba Prueba",
+    "saludo": "Hola prueba 2",
+    "celular": 6672246490,
+    "celularConfirmado": 6672246490,
+    "invitados": [
+      {
+        "_id": "657d3b4fa86b223485c26d63",
+        "nombre": "Amelia"
+      }
+    ]
+  });
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (bienvenida) setBienvenida(!bienvenida);
+    }, 3000);
+
+    const url = window.location.href;
+    const id = url.substring(url.lastIndexOf('/') + 1);
+    console.log('ID:', id);
+
+    setFamilyId(id)
+
+    apiwedding.obtenerFamiliaInfo(id).then((result) => {
+      if (!result.ok) {
+        setFamilyId('')
+        throw new Error(`Error al obtener información de la familia - Código: ${result.status}`);
+      } else {
+        result.json().then(json => {
+          setConfirmacionInfo(json)
+        });
+      }
+    }).catch((error) => {
+      console.error("Error al obtener datos del backend:", error);
+    })
+
+
+  }, []);
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div onDragStart={handleDragStart}>
+      {bienvenida ? (
+        <div className="container-logo">
+          <img
+            src="/JD_logo.png"
+            className="logo-carga"
+            onClick={() => {
+              setBienvenida(!bienvenida);
+            }}
+          ></img>
+        </div>
+      ) : (
+        <div className="container-general">
+          {familyId ? (<>
+            <Contenedor Contenedor confirmacionInfo={confirmacionInfo} setConfirmacionInfo={setConfirmacionInfo}></Contenedor></>) : (<Error404 />)}
+
+        </div>
+      )
+      }
+    </div >
+  );
+
+
+  /* 
+  3:30
+  630
+  7
+  8
+  1130
+  
+  */
 }
 
-export default App
+
+
+export default App;
