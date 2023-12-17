@@ -4,15 +4,9 @@ import { FormularioConfirmacion } from "./components/Formularios/FormularioConfi
 import { Cronometro } from "./components/Portada/Cronometro";
 import { Historia } from "./components/Saludos/Historia";
 import { useEffect, useState, useRef } from "react";
+import { apiwedding } from "./hooks/WeddingHook";
 
-export const Contenedor = () => {
-  const [confirmacionInfo, setConfirmacionInfo] = useState({
-    fase: 1,
-    nombres: ["Joel", "Dayana"],
-    nombresSeleccionados: [],
-    telefono: "",
-    confirmado: false,
-  });
+export const Contenedor = ({ confirmacionInfo, setConfirmacionInfo }) => {
 
   return (
     <>
@@ -22,26 +16,24 @@ export const Contenedor = () => {
         <div className="main-container">
           <img src="/portada.png" alt="Imagen de portada" />
 
-          <div id="bienvenida">
+          {/* <div id="bienvenida">
             <img src="/bienvenida.png" alt="Bienvenida" />
             <Cronometro targetDate={new Date("2024-02-10 19:00:00")} />
-          </div>
+          </div> */}
 
-          <Saludos />
+          {/* <Saludos strSaludos={confirmacionInfo?.saludo} strTitulo={confirmacionInfo?.titulo}/> */}
 
-          <Historia imagen="/foto-juntos.png" />
+          {/* <Historia imagen="/foto-juntos.png" /> */}
 
-          {/* <img src="/poema-el.png" alt="Poema de parte de el" /> */}
+          {/* <Salones /> */}
 
-          <Salones />
+          {/* <img src="/itinerario.png" alt="Itinerario" /> */}
 
-          <img src="/itinerario.png" alt="Itinerario" />
+          {/* <Vestimenta /> */}
 
-          <Vestimenta />
+          {/* <Mensaje /> */}
 
-          <Mensaje />
-
-          <Anuncio />
+          {/* <Anuncio /> */}
 
           <Formulario
             confirmacionInfo={confirmacionInfo}
@@ -65,9 +57,22 @@ export const Contenedor = () => {
 const Formulario = ({ confirmacionInfo, setConfirmacionInfo }) => {
   const sendConfirmacionInfo = () => {
     console.log("Enviando informacion...");
-    setTimeout(() => {
-      setConfirmacionInfo((prev) => ({ ...prev, confirmado: true }));
-    }, 1000);
+    console.log(confirmacionInfo);
+    const response = apiwedding.confirmarInvitacion(confirmacionInfo._id, { celularConfirmado: confirmacionInfo.celularConfirmado, invitadosConfirmados: confirmacionInfo.invitadosConfirmados.map(invitado => invitado._id) });
+
+
+    response.then((res) => {
+      if (!res.ok) {
+        alert(`Error al confirmar la invitación - Código: ${response.status}`);
+      }else {
+        setConfirmacionInfo((prev) => ({ ...prev, confirmado: true }));
+      }
+      
+    }).catch((error) => {
+      alert(`Error al confirmar la invitación - error: ${error}`);
+    })
+    
+
   };
 
   return (
@@ -81,14 +86,14 @@ const Formulario = ({ confirmacionInfo, setConfirmacionInfo }) => {
         />
       ) : (
         <Confirmado
-          nombresSeleccionados={confirmacionInfo.nombresSeleccionados}
+          invitadosSeleccionados={confirmacionInfo.invitadosConfirmados}
         />
       )}
     </div>
   );
 };
 
-const Saludos = () => {
+const Saludos = ({ strTitulo, strSaludos }) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [visible, setVisible] = useState(false);
   const saludo = useRef(null);
@@ -114,9 +119,9 @@ const Saludos = () => {
     <div className="contenedor-imagen" ref={saludo}>
       <img src="/invitado.png" alt="Saludos a Invitado" />
       <div>
-        <span className="texto-invitado titulo-invitado">Fam. Silva Lopez</span>
+        <span className="texto-invitado titulo-invitado">{strTitulo}</span>
         <span className="texto-invitado saludo-invitado">
-          Nos encantaria verlos en esta noche especial
+          {strSaludos}
         </span>
       </div>
     </div>

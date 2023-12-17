@@ -1,21 +1,24 @@
+import { useEffect } from "react";
+
 export const SeleccionNombres = ({
-  nombres,
-  nombresSeleccionados,
-  setNombresSeleccionados,
+  invitados,
+  invitadosSeleccionados,
+  setinvitadosSeleccionados,
   avanzarFase,
 }) => {
-  const handleCheckboxChange = (nombre) => {
-    if (nombresSeleccionados.includes(nombre)) {
+
+  const handleCheckboxChange = (invitado) => {
+    if (invitadosSeleccionados.find((inv) => inv._id == invitado._id)) {
       // Si el nombre ya está seleccionado, quitarlo del arreglo
-      setNombresSeleccionados(
-        nombresSeleccionados.filter(
-          (selectedNombre) => selectedNombre !== nombre
-        )
-      );
-    } else {
-      // Si el nombre no está seleccionado, agregarlo al arreglo
-      setNombresSeleccionados([...nombresSeleccionados, nombre]);
-    }
+      setinvitadosSeleccionados(
+        invitadosSeleccionados.filter(
+          (inv) => inv._id !== invitado._id
+          )
+          );
+        } else {
+          // Si el nombre no está seleccionado, agregarlo al arreglo
+          setinvitadosSeleccionados([...invitadosSeleccionados, invitado]);
+        }
   };
 
   return (
@@ -25,20 +28,20 @@ export const SeleccionNombres = ({
         confirmar. Los invitados con casillas sin seleccionar se cancelarán en
         automático.
       </p>
-      <p className="texto-formulario">Los pases son intranferibles</p>
+      <p className="texto-formulario"><b>Los pases son intranferibles</b></p>
       <ul>
-        {nombres.map((nombre) => (
+        {invitados.map(({_id, nombre}) => (
           <li
-            key={nombre}
+            key={_id}
             className={`texto-formulario nombres ${
-              nombresSeleccionados.includes(nombre) ? "dorado" : ""
+              invitadosSeleccionados.find((inv) => inv._id == _id) ? "dorado" : ""
             }`}
           >
             <label>
               <input
                 type="checkbox"
-                checked={nombresSeleccionados.includes(nombre)}
-                onChange={() => handleCheckboxChange(nombre)}
+                checked={invitadosSeleccionados.find((inv) => inv._id == _id)}
+                onChange={() => handleCheckboxChange({_id, nombre})}
               />
               {nombre}
             </label>

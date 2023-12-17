@@ -236,7 +236,7 @@
       color: var(--dorado);
       background: #fff;
       font-weight: bolder;
-      font-size: 25px;
+      font-size: 3.57vw;
     }
 
   }
@@ -285,4 +285,10 @@
   .container-anuncio {
     font-size: 31px;
   }
+
+  
+  .hashtag {
+    font-size: 25px !important;
+  }
+
 }

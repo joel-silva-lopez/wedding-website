@@ -1,14 +1,14 @@
 export const ConfirmacionNombres = ({
-  nombresSeleccionados = [],
+  invitadosSeleccionados = [],
   confirmarFase,
   retrocederFase,
 }) => (
   <>
-    {nombresSeleccionados.length ? (
+    {invitadosSeleccionados.length ? (
       <>
         <h2 className="texto-formulario">Lista de Nombres Seleccionados:</h2>
         <div className="marco-formulario">
-          {nombresSeleccionados.map((nombre) => (
+          {invitadosSeleccionados.map(({nombre}) => (
             <li key={nombre} className="texto-formulario nombres dorado">
               <label>{nombre}</label>
             </li>

@@ -19,7 +19,7 @@ export const IngresarNumeroCelular = ({
 
   const handleIngresarNumero = () => {
     // Puedes realizar alguna acción si es necesario antes de avanzar de fase
-    setTelefono(numeroCelular);
+    setTelefono(+numeroCelular.replace(/\D/g, ""));
     avanzarFase();
   };
 

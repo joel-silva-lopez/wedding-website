@@ -1,13 +1,13 @@
-export const Confirmado = ({ nombresSeleccionados }) => {
+export const Confirmado = ({ invitadosSeleccionados }) => {
   return (
     <div id="confirmado">
-      {nombresSeleccionados.length ? (
+      {invitadosSeleccionados.length ? (
         <>
           <span className="texto-formulario">
             Se confirmó la asistencia de:
           </span>
           <div className="marco-formulario">
-            {nombresSeleccionados.map((nombre) => (
+            {invitadosSeleccionados.map(({nombre}) => (
               <li key={nombre} className="texto-formulario nombres dorado">
                 <label>{nombre}</label>
               </li>

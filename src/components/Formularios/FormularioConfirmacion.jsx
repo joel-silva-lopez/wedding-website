@@ -10,13 +10,19 @@ export const FormularioConfirmacion = ({
   confirmacionInfo,
   sendConfirmacionInfo,
 }) => {
-  const { fase, nombres, nombresSeleccionados } = confirmacionInfo;
+
+  if (!confirmacionInfo.invitadosConfirmados) {
+    confirmacionInfo['invitadosConfirmados'] = []
+  }
+
+  const { invitados, invitadosConfirmados } = confirmacionInfo;
   const [animate, setAnimate] = useState(false);
+  const [ fase, setFase] = useState(1)
 
   const avanzarFase = () => {
     setAnimate(true);
     setTimeout(() => {
-      setConfirmacionInfo((prev) => ({ ...prev, fase: fase + 1 }));
+      setFase(fase + 1 );
       setAnimate(false);
     }, 1500);
   };
@@ -24,17 +30,17 @@ export const FormularioConfirmacion = ({
   const retrocederFase = () => {
     setAnimate(true);
     setTimeout(() => {
-      setConfirmacionInfo((prev) => ({ ...prev, fase: fase - 1 }));
+      setFase(fase - 1 );
       setAnimate(false);
     }, 1500);
   };
 
-  const setTelefono = (telefono) => {
-    setConfirmacionInfo((prev) => ({ ...prev, telefono }));
+  const setTelefono = (celularConfirmado) => {
+    setConfirmacionInfo((prev) => ({ ...prev, celularConfirmado }));
   };
 
   useEffect(() => {
-    if (fase === 4 && nombresSeleccionados.length === 0) {
+    if (fase === 4 && invitadosConfirmados.length === 0) {
       avanzarFase(); // Cambia automáticamente a la fase 5 si no hay nombres seleccionados
     } else if (fase === 5) {
       sendConfirmacionInfo(); // Envía la información cuando se alcanza la fase 5
@@ -44,18 +50,18 @@ export const FormularioConfirmacion = ({
   const phaseComponents = {
     1: (
       <PasesInfo
-        numeroDePases={nombres?.length || 0}
+        numeroDePases={invitados?.length || 0}
         iniciarConfirmacion={avanzarFase}
       />
     ),
     2: (
       <SeleccionNombres
-        nombres={nombres}
-        nombresSeleccionados={nombresSeleccionados}
-        setNombresSeleccionados={(nombres) =>
+        invitados={invitados}
+        invitadosSeleccionados={invitadosConfirmados}
+        setinvitadosSeleccionados={(nombres) =>
           setConfirmacionInfo((prev) => ({
             ...prev,
-            nombresSeleccionados: nombres,
+            invitadosConfirmados: nombres,
           }))
         }
         avanzarFase={avanzarFase}
@@ -63,7 +69,7 @@ export const FormularioConfirmacion = ({
     ),
     3: (
       <ConfirmacionNombres
-        nombresSeleccionados={nombresSeleccionados}
+        invitadosSeleccionados={invitadosConfirmados}
         confirmarFase={avanzarFase}
         retrocederFase={retrocederFase}
       />
