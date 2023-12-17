@@ -1,21 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { Contenedor } from "./Contenedor";
-import { Musica } from "./components/Reproductor/Musica";
 import { apiwedding } from "./hooks/WeddingHook";
 import { Error404 } from "./components/Errores/Error404";
-
-const ToolTip = ({ showTooltip }) => {
-  return (
-    <>
-      <div className={`tooltip ${showTooltip ? "visible" : ""}`}>
-        <img className="" src="/flecha.png" alt="" />
-
-        Presiona aqui
-      </div>
-    </>
-  );
-};
 
 function App() {
   const handleDragStart = (event) => {
@@ -25,7 +12,6 @@ function App() {
   };
 
   const [bienvenida, setBienvenida] = useState(true);
-  const [showTooltip, setShowTooltip] = useState(false);
   const [familyId, setFamilyId] = useState('')
   const [confirmacionInfo, setConfirmacionInfo] = useState({
     "_id": "6577c542a86b223485c26d54",
@@ -34,16 +20,16 @@ function App() {
     "celular": 6672246490,
     "celularConfirmado": 6672246490,
     "invitados": [
-        {
-            "_id": "657d3b4fa86b223485c26d63",
-            "nombre": "Amelia"
-        }
+      {
+        "_id": "657d3b4fa86b223485c26d63",
+        "nombre": "Amelia"
+      }
     ]
   });
 
   useEffect(() => {
     setTimeout(() => {
-      if (!showTooltip) setShowTooltip(true);
+      if (bienvenida) setBienvenida(!bienvenida);
     }, 3000);
 
     const url = window.location.href;
@@ -59,7 +45,7 @@ function App() {
       } else {
         result.json().then(json => {
           setConfirmacionInfo(json)
-        });        
+        });
       }
     }).catch((error) => {
       console.error("Error al obtener datos del backend:", error);
@@ -80,11 +66,10 @@ function App() {
               setBienvenida(!bienvenida);
             }}
           ></img>
-          {<ToolTip showTooltip={showTooltip} />}
         </div>
       ) : (
         <div className="container-general">
-          {familyId ? (<>{/* <Musica /> */}
+          {familyId ? (<>
             <Contenedor Contenedor confirmacionInfo={confirmacionInfo} setConfirmacionInfo={setConfirmacionInfo}></Contenedor></>) : (<Error404 />)}
 
         </div>

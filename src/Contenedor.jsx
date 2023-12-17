@@ -16,24 +16,24 @@ export const Contenedor = ({ confirmacionInfo, setConfirmacionInfo }) => {
         <div className="main-container">
           <img src="/portada.png" alt="Imagen de portada" />
 
-          {/* <div id="bienvenida">
+          <div id="bienvenida">
             <img src="/bienvenida.png" alt="Bienvenida" />
             <Cronometro targetDate={new Date("2024-02-10 19:00:00")} />
-          </div> */}
+          </div>
 
-          {/* <Saludos strSaludos={confirmacionInfo?.saludo} strTitulo={confirmacionInfo?.titulo}/> */}
+          <Saludos strSaludos={confirmacionInfo?.saludo} strTitulo={confirmacionInfo?.titulo}/>
 
-          {/* <Historia imagen="/foto-juntos.png" /> */}
+          <Historia imagen="/foto-juntos.png" />
 
-          {/* <Salones /> */}
+          <Salones />
 
-          {/* <img src="/itinerario.png" alt="Itinerario" /> */}
+          <img src="/itinerario.png" alt="Itinerario" />
 
-          {/* <Vestimenta /> */}
+          <Vestimenta />
 
-          {/* <Mensaje /> */}
+          <Mensaje />
 
-          {/* <Anuncio /> */}
+          <Anuncio />
 
           <Formulario
             confirmacionInfo={confirmacionInfo}
