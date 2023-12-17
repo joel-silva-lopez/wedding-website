@@ -32,8 +32,9 @@ function App() {
       if (bienvenida) setBienvenida(!bienvenida);
     }, 3000);
 
-    const url = window.location.href;
-    const id = url.substring(url.lastIndexOf('/') + 1);
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get('id');
+
     console.log('ID:', id);
 
     setFamilyId(id)
