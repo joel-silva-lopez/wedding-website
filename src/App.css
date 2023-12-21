@@ -87,3 +87,7 @@ body {
     clip-path: none;
   }
 }
+
+.oculto {
+  display: none;
+}

@@ -55,39 +55,56 @@ function App() {
 
   }, []);
 
+  const [imagenesCargadas, setImagenesCargadas] = useState(false);
+
+  useEffect(() => {
+    const imagenes = Array.from(document.images); // Obtiene todas las imágenes
+
+    const promesasCarga = imagenes.map((imagen) => {
+      return new Promise((resolve) => {
+        if (imagen.complete) {
+          resolve();
+        } else {
+          imagen.addEventListener("load", resolve, { once: true });
+        }
+      });
+    });
+
+    Promise.all(promesasCarga)
+      .then(() => setImagenesCargadas(true))
+      .catch((error) => {console.error("Error al cargar imágenes:", error); setImagenesCargadas(true);});
+
+    // Limpia los eventos al desmontar el componente
+    return () => {
+      imagenes.forEach((imagen) => {
+        imagen.removeEventListener("load", () => {}, { once: true });
+      });
+    };
+  }, []); // El efecto se ejecuta solo al montar el componente
+
+
 
   return (
     <div onDragStart={handleDragStart}>
-      {bienvenida ? (
-        <div className="container-logo">
+      
+        <div className={`container-logo ${!(bienvenida && imagenesCargadas) ? 'oculto':''}`}>
           <img
             src="/JD_logo.png"
             className="logo-carga"
-            onClick={() => {
-              setBienvenida(!bienvenida);
-            }}
+            // onClick={() => {
+            //   setBienvenida(!bienvenida);
+            // }}
           ></img>
         </div>
-      ) : (
-        <div className="container-general">
+      
+        <div className={`container-general ${bienvenida && imagenesCargadas ? 'oculto':''}`}>
           {familyId ? (<>
             <Contenedor Contenedor confirmacionInfo={confirmacionInfo} setConfirmacionInfo={setConfirmacionInfo}></Contenedor></>) : (<Error404 />)}
 
         </div>
-      )
-      }
+      
     </div >
   );
-
-
-  /* 
-  3:30
-  630
-  7
-  8
-  1130
-  
-  */
 }
 
 
