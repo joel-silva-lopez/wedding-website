@@ -28,7 +28,7 @@ export const Confirmado = ({ invitadosSeleccionados }) => {
       <span className="texto-formulario">
         Comuniquese con atencion a clientes
       </span>
-      <a className="atencion-clientes" href="https://wa.me/+5216671489824/?text=Buenas%20tardes,%20tengo%20un%20problema%20con%20mi%20invitacion.">
+      <a className="atencion-clientes" href="https://wa.me/+5216672371132/?text=Buenas%20tardes,%20tengo%20un%20problema%20con%20mi%20invitacion.">
         Enviar mensaje
       </a>
     </div>

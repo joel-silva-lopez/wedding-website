@@ -13,19 +13,7 @@ function App() {
 
   const [bienvenida, setBienvenida] = useState(true);
   const [familyId, setFamilyId] = useState('')
-  const [confirmacionInfo, setConfirmacionInfo] = useState({
-    "_id": "6577c542a86b223485c26d54",
-    "titulo": "Fam. Prueba Prueba",
-    "saludo": "Hola prueba 2",
-    "celular": 6672246490,
-    "celularConfirmado": 6672246490,
-    "invitados": [
-      {
-        "_id": "657d3b4fa86b223485c26d63",
-        "nombre": "Amelia"
-      }
-    ]
-  });
+  const [confirmacionInfo, setConfirmacionInfo] = useState({});
 
   useEffect(() => {
     setTimeout(() => {
