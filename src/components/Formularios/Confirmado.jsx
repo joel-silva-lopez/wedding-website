@@ -25,8 +25,8 @@ export const Confirmado = ({ invitadosSeleccionados, family_id }) => {
       )}
       
       <QrCode family_id={family_id}/>
-
-      <span className="texto-formulario" style={{ marginTop: "70px" }}>
+        <hr />
+      <span className="texto-formulario" >
         ¿Tiene problemas en su confirmación?
       </span>
       <span className="texto-formulario">

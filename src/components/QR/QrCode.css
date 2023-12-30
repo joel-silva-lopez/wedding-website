@@ -1,6 +1,7 @@
 #qrinvite {
-    width: 100% !important;
-    height: 100% !important;
+    align-self: center;
+    width: 80% !important;
+    height: 80% !important;
     border-radius: 15px;
     border: 2px var(--dorado) solid;
 }
