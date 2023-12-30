@@ -1,4 +1,5 @@
-export const Confirmado = ({ invitadosSeleccionados }) => {
+import {QrCode} from '../../components/QR/QrCode'
+export const Confirmado = ({ invitadosSeleccionados, family_id }) => {
   return (
     <div id="confirmado">
       {invitadosSeleccionados.length ? (
@@ -22,6 +23,9 @@ export const Confirmado = ({ invitadosSeleccionados }) => {
           </span>
         </>
       )}
+      
+      <QrCode family_id={family_id}/>
+
       <span className="texto-formulario" style={{ marginTop: "70px" }}>
         ¿Tiene problemas en su confirmación?
       </span>

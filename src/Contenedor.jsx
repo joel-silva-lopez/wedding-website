@@ -87,6 +87,7 @@ const Formulario = ({ confirmacionInfo, setConfirmacionInfo }) => {
       ) : (
         <Confirmado
           invitadosSeleccionados={confirmacionInfo.invitadosConfirmados}
+          family_id={confirmacionInfo['_id']}
         />
       )}
     </div>
