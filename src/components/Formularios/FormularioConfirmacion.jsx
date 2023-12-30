@@ -40,9 +40,12 @@ export const FormularioConfirmacion = ({
   };
 
   useEffect(() => {
-    if (fase === 4 && invitadosConfirmados.length === 0) {
+    /* if (fase === 4 && invitadosConfirmados.length === 0) {
       avanzarFase(); // Cambia automáticamente a la fase 5 si no hay nombres seleccionados
     } else if (fase === 5) {
+      sendConfirmacionInfo(); // Envía la información cuando se alcanza la fase 5
+    } */
+    if (fase === 4) {
       sendConfirmacionInfo(); // Envía la información cuando se alcanza la fase 5
     }
   }, [fase]);
@@ -74,7 +77,7 @@ export const FormularioConfirmacion = ({
         retrocederFase={retrocederFase}
       />
     ),
-    4: (
+    /* 4: (
       <IngresarNumeroCelular
         setTelefono={setTelefono}
         avanzarFase={avanzarFase}
@@ -82,6 +85,11 @@ export const FormularioConfirmacion = ({
       />
     ),
     5: (
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+    ), */
+    4: (
       <div className="loader-container">
         <div className="loader"></div>
       </div>
