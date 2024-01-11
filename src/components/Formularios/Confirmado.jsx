@@ -14,6 +14,8 @@ export const Confirmado = ({ invitadosSeleccionados, family_id }) => {
               </li>
             ))}
           </div>
+
+          <QrCode family_id={family_id}/>
         </>
       ) : (
         <>
@@ -24,7 +26,6 @@ export const Confirmado = ({ invitadosSeleccionados, family_id }) => {
         </>
       )}
       
-      <QrCode family_id={family_id}/>
         <hr />
       <span className="texto-formulario" >
         ¿Tiene problemas en su confirmación?
